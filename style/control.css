@@ -1,0 +1,158 @@
+#control {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 2rem;
+}
+#control > * {
+    border-radius: 20px;
+}
+
+#create-entry {
+    background-color: var(--caeruleum);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    display: flex;
+    justify-content: center;
+    --offset: 10px;
+    box-shadow: 0 var(--offset) 0 0 var(--caeruleum-darker), 0 var(--offset) 10px 0 black;
+}
+#create-entry > img {
+    filter: invert();
+    width: 80px;
+    box-sizing: content-box;
+    display: block;
+    padding: 1rem;
+}
+/* Hover */
+#create-entry:hover {
+    --m: 0.3;
+    transform: translateY(calc(var(--m)*var(--offset)));
+    box-shadow: 0 calc(calc(1 - var(--m))*var(--offset)) 0 0 var(--caeruleum-darker), 0 calc(calc(1 - var(--m))*var(--offset)) 20px -5px black;
+}
+/* Hover */
+#create-entry:active {
+    transform: translateY(var(--offset));
+    box-shadow: 0 0 0 0 var(--caeruleum-dark);
+}
+
+
+#categories-list {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 20px -10px black;
+}
+.category-item {
+    color: var(--caeruleum-white);
+    transition: height 0.2s ease, background-color 0.2s ease;
+    overflow: hidden;
+    box-shadow: 0 0 10px 0 black;
+}
+.category-item > span {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 1rem 0.5rem;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.category-item > div {
+    width: 100%;
+    padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+.category-item > div > img {
+    display: block;
+    width: 50px;
+    filter: invert();
+    padding: 0.5rem;
+    border-radius: 10px;
+    opacity: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+/* Hover */
+.category-item > div > img:hover {
+    animation-name: wobble;
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+    --amp: -5px;
+    background-color: hsla(0, 0%, 100%, 0.2);
+}
+/* Hover */
+
+
+#category-edit {
+    position: absolute;
+    border: 5px solid var(--caeruleum-white);
+    border-radius: 0 10px 10px 0;
+    background-color: var(--caeruleum-white);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+#category-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 5px;
+}
+#category-name {
+    width: 100%;
+    font-size: large;
+}
+#category-color-select {
+    /* width: 100%; */
+    cursor: pointer;
+    font-family: inherit;
+    font-size: large;
+    color: var(--caeruleum-dark-grey);
+    background-color: var(--caeruleum-white);
+    border-radius: 10px;
+}
+#category-edit > .buttons > button {
+    font-size: large;
+}
+
+#selected-color {
+    padding: 25px;
+    border-radius: 10px;
+    transition: all 0.1s ease;
+    border: 2px solid #e6e6e6;
+}
+/* Hover */
+#selected-color:hover {
+    animation-name: wobble;
+    animation-duration: 0.2s;
+    animation-timing-function: ease;
+    --amp: -5px;
+}
+/* Hover */
+#dropdown {
+    position: fixed;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 160px;
+    box-sizing: content-box !important;
+    background-color: var(--caeruleum-white);
+    padding: 5px;
+    border-radius: 10px;
+}
+#dropdown > div {
+    flex: 0 0 25px;
+    padding: 25px;
+    border-radius: 10px;
+}
+#dropdown > div:hover {
+    outline: 2px solid var(--caeruleum-dark);
+}
