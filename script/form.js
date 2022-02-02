@@ -28,6 +28,7 @@ class Form {
             if (this.categorySelect.value === "new_category") {
                 this.categorySelect.style.display = "none";
                 this.categoryNameInput.style.display = "block";
+                this.categoryNameInput.focus();
             }
         });
         this.textArea.addEventListener("input", () => {
@@ -147,11 +148,11 @@ class Form {
     }
 
     showAdd() {
-        document.body.classList.add("dim");
-        document.getElementById("overlay").style.display = "block";
-        this.DOM.style.display = "block";
+        _SetOverlay(true);
+        
+        this.DOM.classList.add("add");
         setTimeout(() => {
-            this.DOM.classList.add("visible");
+            this.DOM.classList.add("active");
         }, 10);
         this.leftButton.textContent = "Cancel";
         this.rightButton.textContent = "Add";
@@ -159,11 +160,11 @@ class Form {
         this.rightButton.addEventListener("click", this.#ACTIONS.ADD);
     }
     showEdit(e) {
-        document.body.classList.add("dim");
-        document.getElementById("overlay").style.display = "block";
-        this.DOM.style.display = "block";
+        _SetOverlay(true);
+
+        this.DOM.classList.add("edit");
         setTimeout(() => {
-            this.DOM.classList.add("visible");
+            this.DOM.classList.add("active");
         }, 10);
 
         this.#tmpEvent = e;
@@ -200,11 +201,11 @@ class Form {
         this.rightButton.addEventListener("click", this.#ACTIONS.EDIT);
     }
     hide() {
-        document.body.classList.remove("dim");
-        document.getElementById("overlay").style.display = "none";
-        this.DOM.classList.remove("visible");
+        _SetOverlay(false);
+        this.DOM.classList.remove("active");
         setTimeout(() => {
-            this.DOM.style.display = "none";
+            this.DOM.classList.remove("add");
+            this.DOM.classList.remove("edit");
         }, 200);
     }
 

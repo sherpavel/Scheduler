@@ -7,43 +7,62 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style/timeline.css">
     <link rel="stylesheet" href="style/control.css">
     <link rel="stylesheet" href="style/form.css">
+    <link rel="stylesheet" href="style/auth.css">
     <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/mobile.css">
 
     <script src="./script/form.js"></script>
     <script src="./script/categoryEdit.js"></script>
+    <script src="./script/auth.js"></script>
     <script src="./script/main.js"></script>
 
-    <title> links</title>
+    <title>Scheduler</title>
 </head>
 <body>
-    <!-- <div class="caeruleum-title">
-        <h1>Scheduler</h1>
-    </div> -->
+    <div id="debug" style="position: fixed; z-index: 1000; color: white; background-color: black;"></div>
+
+    <div id="title">
+        <h1>
+            Scheduler
+            <span>BETA</span>
+        </h1>
+        <div id="links">
+            <!-- <div id="login-open">Login</div> -->
+            <!-- <div><a href="">About</a></div> -->
+        </div>
+    </div>
     
     <div id="main">
         <div id="control">
             <div id="create-entry">
                 <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMS41IDBjNi4zNDcgMCAxMS41IDUuMTUzIDExLjUgMTEuNXMtNS4xNTMgMTEuNS0xMS41IDExLjUtMTEuNS01LjE1My0xMS41LTExLjUgNS4xNTMtMTEuNSAxMS41LTExLjV6bTAgMWM1Ljc5NSAwIDEwLjUgNC43MDUgMTAuNSAxMC41cy00LjcwNSAxMC41LTEwLjUgMTAuNS0xMC41LTQuNzA1LTEwLjUtMTAuNSA0LjcwNS0xMC41IDEwLjUtMTAuNXptLjUgMTBoNnYxaC02djZoLTF2LTZoLTZ2LTFoNnYtNmgxdjZ6Ii8+PC9zdmc+">
+                <div style="width: 100%; height: 100%; position: absolute; top: 0; left: 0"></div>
             </div>
-            <div id="categories-list"></div>
+            <div id="categories-list-wrapper">
+                <div id="open-categories-list">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yNCAxOHYxaC0yNHYtMWgyNHptMC02djFoLTI0di0xaDI0em0wLTZ2MWgtMjR2LTFoMjR6IiBmaWxsPSIjMTA0MGUyIi8+PHBhdGggZD0iTTI0IDE5aC0yNHYtMWgyNHYxem0wLTZoLTI0di0xaDI0djF6bTAtNmgtMjR2LTFoMjR2MXoiLz48L3N2Zz4=">
+                    <div style="width: 100%; height: 100%; position: absolute; top: 0; left: 0"></div>
+                </div>
+                <div id="categories-list"></div>
+            </div>
         </div>
         <div id="timeline-wrapper">
             <div id="timeline"></div>
         </div>
     </div>
 
-    <div id="overlay" style="display: none;"></div>
-    <div id="form" style="display: none;">
+    <div id="overlay" style="display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0;"></div>
+    <div id="form">
         <div id="inputs">
             <input type="text" id="label-input" placeholder="Label">
             <div>
                 <select id="category-select"></select>
-                <input style="display: none;" type="text" id="category-input" placeholder="Category name">
+                <input style="display: none;" type="text" id="category-input" placeholder="Category">
                 <input type="date" id="date-input" required>
             </div>
             <textarea id="info-input" rows="2" placeholder="Additional notes..."></textarea>
@@ -51,21 +70,20 @@
         <hr>
         <div class="buttons">
             <button id="left-button"></button>
-            <button id="right-button"></button>
+            <button id="right-button" class="main"></button>
         </div>
     </div>
-
-    <div id="category-edit" style="display: none;">
+    <div id="category-edit">
         <div id="category-inputs">
             <input type="text" id="category-name">
             <div id="category-color-select">
                 <div id="selected-color"></div>
-                <div id="dropdown" style="display: none;"></div>
+                <div id="dropdown"></div>
             </div>
         </div>
         <div class="buttons">
             <button id="cancel-button">Cancel</button>
-            <button id="save-button">Save</button>
+            <button id="save-button" class="main">Save</button>
         </div>
     </div>
     <!-- <div id="confirm-delete"></div> -->

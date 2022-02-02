@@ -1,6 +1,7 @@
 #form {
+    display: none;
     position: fixed;
-    width: min(max(50%, 400px), 700px);
+    width: min(max(50%, 450px), 500px);
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
@@ -11,7 +12,13 @@
     opacity: 0;
     transition: opacity 0.2s ease;
 }
-#form.visible {
+#form.add {
+    display: block;
+}
+#form.edit {
+    display: block;
+}
+#form.active {
     opacity: 1;
 }
 #form > hr {
@@ -57,11 +64,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow: hidden;
     background-color: var(--caeruleum-white);
     color: var(--caeruleum-dark-grey);
-
     border: 2px solid #e6e6e6;
     cursor: text;
     border-radius: 10px;
     padding: 10px;
+    transition: all 0.2s ease;
 }
 #info-input:focus {
     border: 2px solid var(--caeruleum);
@@ -77,6 +84,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 5px;
     border: 2px solid #e6e6e6;
     border-radius: 10px;
+    transition: all 0.2s ease;
 }
 #category-select:focus {
     border: 2px solid var(--caeruleum);
@@ -86,10 +94,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: large;
 }
 
-#right-button {
-    background-color: var(--caeruleum);
-    color: var(--caeruleum-white);
-}
 #delete-button {
     padding: 0px !important;
     flex: 1 1.4 auto !important;
@@ -105,19 +109,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert();
 }
 
-/* Hover */
-#left-button:hover {
-    background-color: #999;
-    color: var(--caeruleum-white);
-}
-#right-button:hover {
-    background-color: var(--caeruleum-orange);
-}
-#delete-button:hover {
-    background-color: var(--caeruleum-dark-red);
-}
-/* Hover */
-
 
 #inputs .hidden {
     display: none;
@@ -132,4 +123,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #date-input.view {
     color: #999 !important;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+    #category-select:hover {
+        border: 2px solid var(--caeruleum);
+    }
+    #info-input:hover {
+        border: 2px solid var(--caeruleum);
+    }
+    #left-button:hover {
+        background-color: #999;
+        color: var(--caeruleum-white);
+    }
+    #right-button:hover {
+        background-color: var(--caeruleum-orange);
+    }
+    #delete-button:hover {
+        background-color: var(--caeruleum-dark-red);
+    }
 }

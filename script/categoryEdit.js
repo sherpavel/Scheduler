@@ -1,6 +1,13 @@
 class CategoryEdit {
+    #dropdownOpen;
     constructor(DOM, colors) {
         this.DOM = DOM;
+
+        let wrapper = document.getElementById("categories-list-wrapper");
+        document.getElementById("open-categories-list").addEventListener("click", () => {
+            wrapper.classList.toggle("active");
+            if (!wrapper.classList.contains("active")) this.close();
+        });
 
         this.nameInput = document.getElementById("category-name");
         this.colorSelect = document.getElementById("category-color-select");
@@ -21,17 +28,24 @@ class CategoryEdit {
                 this.closeDropdown();
             });
         });
+
         this.nameInput.addEventListener("input", () => this.nameInput.classList.remove("invalid"));
-        this.selectedColor.addEventListener("click", () => this.openDropdown());
+
+        this.selectedColor.addEventListener("click", () => {
+            if (this.#dropdownOpen) this.closeDropdown();
+            else this.openDropdown();
+        });
         this.cancelButton.addEventListener("click", () => this.close());
         this.saveButton.addEventListener("click", () => this.save());
-
-        this.closeDropdown();
     }
 
     #saveListeners = [];
-    addSaveListener(l) {
-        this.#saveListeners.push(l);
+    addListener(type, listener) {
+        switch (type) {
+            case 'save':
+                this.#saveListeners.push(listener);
+                break;
+        }
     }
 
     #tmpC;
@@ -43,23 +57,30 @@ class CategoryEdit {
 
         let r = getComputedStyle(document.getElementById("categories-list")).getPropertyValue("border-radius")
 
-        this.DOM.style.display = "block";
-        let rect = catBlock.DOM.getBoundingClientRect();
-        this.DOM.style.left = rect.right + "px";
-        this.DOM.style.top = rect.top + "px";
+        this.DOM.classList.add("active");
+        if (!IS_MOBILE) {
+            let rect = catBlock.DOM.getBoundingClientRect();
+            this.DOM.style.left = rect.right + "px";
+            this.DOM.style.top = rect.top + "px";
+        }
 
         this.nameInput.value = c;
         this.selectedColor.className = categories[c].color;
         this.selectedColor.style.backgroundColor = categories[c].color;
 
         document.getElementById("timeline-wrapper").style.opacity = "0.2";
+        document.getElementById("create-entry").style.opacity = "0.2";
     }
     close() {
-        this.DOM.style.display = "none";
+        this.closeDropdown();
+        this.DOM.classList.remove("active");
         this.nameInput.classList.remove("invalid");
         document.getElementById("timeline-wrapper").style.opacity = "1";
-        this.#catBlock.setLock(false);
-        this.#catBlock.hide();
+        document.getElementById("create-entry").style.opacity = "1";
+        if (this.#catBlock) {
+            this.#catBlock.setLock(false);
+            this.#catBlock.hide();
+        }
     }
     save() {
         if (this.nameInput.value.trim() === "") {
@@ -78,10 +99,12 @@ class CategoryEdit {
     }
 
     openDropdown() {
-        this.dropdown.style.display = "flex";
+        this.#dropdownOpen = true;
+        this.dropdown.classList.add("active");
     }
     closeDropdown() {
-        this.dropdown.style.display = "none";
+        this.#dropdownOpen = false;
+        this.dropdown.classList.remove("active");
     }
 
     #shake(e) {

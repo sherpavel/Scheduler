@@ -3,42 +3,40 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 2rem;
-}
-#control > * {
-    border-radius: 20px;
+    align-items: center;
+    gap: 4rem;
 }
 
 #create-entry {
     background-color: var(--caeruleum);
     border-radius: 20px;
     cursor: pointer;
-    transition: all 0.1s ease;
-    display: flex;
-    justify-content: center;
+    width: fit-content;
     --offset: 10px;
-    box-shadow: 0 var(--offset) 0 0 var(--caeruleum-darker), 0 var(--offset) 10px 0 black;
+    box-shadow: 0 var(--offset) 0 0 hsl(222, 50%, 30%), 0 var(--offset) 10px 0 black;
+    transition: all 0.1s ease, background-color 0.3s ease;
+}
+#create-entry:active {
+    transform: translateY(var(--offset));
+    box-shadow: 0 0 0 0 var(--caeruleum-dark) !important;
 }
 #create-entry > img {
-    filter: invert();
     width: 80px;
+    height: 80px;
+    filter: invert();
     box-sizing: content-box;
     display: block;
     padding: 1rem;
 }
-/* Hover */
-#create-entry:hover {
-    --m: 0.3;
-    transform: translateY(calc(var(--m)*var(--offset)));
-    box-shadow: 0 calc(calc(1 - var(--m))*var(--offset)) 0 0 var(--caeruleum-darker), 0 calc(calc(1 - var(--m))*var(--offset)) 20px -5px black;
-}
-/* Hover */
-#create-entry:active {
-    transform: translateY(var(--offset));
-    box-shadow: 0 0 0 0 var(--caeruleum-dark);
-}
 
 
+#categories-list-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+}
+#open-categories-list {
+    display: none;
+}
 #categories-list {
     display: flex;
     flex-direction: column;
@@ -49,14 +47,14 @@
     color: var(--caeruleum-white);
     transition: height 0.2s ease, background-color 0.2s ease;
     overflow: hidden;
-    box-shadow: 0 0 10px 0 black;
+    box-shadow: 0 0 20px -5px black;
 }
 .category-item > span {
     display: block;
     width: 100%;
     margin: 0;
-    padding: 1rem 0.5rem;
-    font-size: x-large;
+    padding: 1rem 1rem;
+    font-size: larger;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
@@ -80,24 +78,26 @@
     cursor: pointer;
     transition: all 0.2s ease;
 }
-/* Hover */
-.category-item > div > img:hover {
+.category-item > div > img:active {
     animation-name: wobble;
     animation-duration: 0.2s;
     animation-timing-function: ease;
     --amp: -5px;
     background-color: hsla(0, 0%, 100%, 0.2);
 }
-/* Hover */
 
-
+/* Category Edit */
 #category-edit {
+    display: none;
     position: absolute;
     border: 5px solid var(--caeruleum-white);
-    border-radius: 0 10px 10px 0;
+    border-radius: 20px;
     background-color: var(--caeruleum-white);
     overflow: hidden;
     transition: all 0.2s ease;
+}
+#category-edit.active {
+    display: block;
 }
 #category-inputs {
     display: flex;
@@ -106,8 +106,7 @@
     padding: 5px;
 }
 #category-name {
-    width: 100%;
-    font-size: large;
+    width: 15ch;
 }
 #category-color-select {
     /* width: 100%; */
@@ -118,41 +117,58 @@
     background-color: var(--caeruleum-white);
     border-radius: 10px;
 }
-#category-edit > .buttons > button {
-    font-size: large;
-}
-
 #selected-color {
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
     transition: all 0.1s ease;
     border: 2px solid #e6e6e6;
 }
-/* Hover */
-#selected-color:hover {
-    animation-name: wobble;
-    animation-duration: 0.2s;
-    animation-timing-function: ease;
-    --amp: -5px;
-}
-/* Hover */
 #dropdown {
+    display: none;
     position: fixed;
+    transform: translateY(-100%);
     z-index: 10;
-    display: flex;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(3, 1fr);
     gap: 5px;
-    width: 160px;
     box-sizing: content-box !important;
     background-color: var(--caeruleum-white);
     padding: 5px;
     border-radius: 10px;
 }
+#dropdown.active {
+    display: grid;
+}
 #dropdown > div {
-    flex: 0 0 25px;
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
 }
-#dropdown > div:hover {
-    outline: 2px solid var(--caeruleum-dark);
+
+
+@media (hover: hover) and (pointer: fine) {
+    #create-entry:hover {
+        background-color: var(--caeruleum-orange);
+        box-shadow: 0 var(--offset) 0 0 hsl(9, 50%, 30%), 0 var(--offset) 10px 0 black;
+        /* --m: 0.3;
+        transform: translateY(calc(var(--m)*var(--offset)));
+        box-shadow: 0 calc(calc(1 - var(--m))*var(--offset)) 0 0 var(--caeruleum-darker), 0 calc(calc(1 - var(--m))*var(--offset)) 20px -5px black; */
+    }
+    .category-item > div > img:hover {
+        animation-name: wobble;
+        animation-duration: 0.2s;
+        animation-timing-function: ease;
+        --amp: -5px;
+        background-color: hsla(0, 0%, 100%, 0.2);
+    }
+    #selected-color:hover {
+        animation-name: wobble;
+        animation-duration: 0.2s;
+        animation-timing-function: ease;
+        --amp: -5px;
+    }
+    #save-button:hover {
+        background-color: var(--caeruleum-orange);
+    }
+    #dropdown > div:hover {
+        outline: 2px solid var(--caeruleum-dark);
+    }
 }
